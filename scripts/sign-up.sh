@@ -1,6 +1,6 @@
 #!/bin/bash
 
-API="${API_ORIGIN:-http://localhost:4741}"
+API="${API_ORIGIN:-https://mighty-ridge-10376.herokuapp.com/}"
 URL_PATH="/sign-up"
 curl "${API}${URL_PATH}" \
   --include \
@@ -8,9 +8,9 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'",
-      "password_confirmation": "'"${PASSWORD}"'"
+      "email": "bill",
+      "password": "bill",
+      "password_confirmation": "bill"
     }
   }'
 
