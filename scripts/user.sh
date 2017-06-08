@@ -1,10 +1,5 @@
 #!/bin/bash
+TOKEN=BAhJIiU1ODIyMDlmZTUyY2IyNWQ2MTExZDdiY2M1MDY0YzRjOAY6BkVG--00d4f6776f04d22e25780521fe5c1d5a70b1cfcc
 
-API="${API_ORIGIN:-http://localhost:4741}"
-URL_PATH="/users"
-curl "${API}${URL_PATH}/$ID" \
-  --include \
-  --request GET \
+curl --include --request GET http://localhost:4741/users/$ID \
   --header "Authorization: Token token=$TOKEN"
-
-echo
