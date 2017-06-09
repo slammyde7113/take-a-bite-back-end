@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :update, :destroy]
-
+#  before_action :all_profiles, only: [:show_user]
   # GET /profiles
   def index
     @profiles = Profile.all
@@ -10,7 +10,18 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1
   def show
-    render json: @profile
+    render json: @profile.user
+  end
+
+  # GET /profiles/show-user/1
+  def show_user
+    @profiles = []
+    Profile.find_each do |profile|
+      if profile.user.id == params[:id].to_i
+        @profiles.push profile.user
+      end
+    end
+    render json: @profiles
   end
 
   # POST /profiles
@@ -43,6 +54,12 @@ class ProfilesController < ApplicationController
     def set_profile
       @profile = Profile.find(params[:id])
     end
+
+    # def all_profiles
+    #   Profile.where(params[:id]).each |x| do
+    #     @profiles_array.push(x)
+    #   end
+    # end
 
     # Only allow a trusted parameter "white list" through.
     def profile_params
