@@ -1,9 +1,10 @@
-class ProfilesController < ApplicationController
+class ProfilesController < OpenReadController
   before_action :set_profile, only: [:show, :update, :destroy]
 #  before_action :all_profiles, only: [:show_user]
   # GET /profiles
   def index
-    @profiles = Profile.all
+    @profiles = current_user.profiles
+
 
     render json: @profiles
   end
@@ -13,12 +14,35 @@ class ProfilesController < ApplicationController
     render json: @profile.user
   end
 
-  # GET /profiles/show-user/1
-  def show_user
+  # def show_profiles
+  #   @profiles = []
+  #   Profile.find_each do |profile|
+  #     if profile.user.id ==
+  #       @profiles.push profile.menu_item
+  #     end
+  #   end
+  #   render json: @profiles
+  # end
+
+  # GET /profiles/show-profile-items/1
+  def show_profile_total
+    @menu = []
+    MenuItem.find_each do |item|
+      if item.price < params[:price].to_i
+        @menu.push item
+      end
+    end
+    render json: @menu
+  end
+
+  # GET /profiles/show-profile-items/1&1
+  def show_profile_items
     @profiles = []
+    index = params[:menu].to_i
+    puts index
     Profile.find_each do |profile|
-      if profile.user.id == params[:id].to_i
-        @profiles.push profile.user
+      if profile.user.id == params[:id].to_i && profile.menu_item.id == index
+        @profiles.push profile.menu_item
       end
     end
     render json: @profiles

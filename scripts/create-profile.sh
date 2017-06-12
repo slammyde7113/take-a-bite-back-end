@@ -12,5 +12,5 @@ curl --include --request POST http://localhost:4741/profile \
     "name": "Pizza",
     "description": "Saucy goodness",
     "location": "200 Blue St, Cat City"
-  }
+  },
 }'
