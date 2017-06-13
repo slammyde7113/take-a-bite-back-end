@@ -63,8 +63,9 @@ class ProfilesController < OpenReadController
 
   # PATCH/PUT /profiles/1
   def update
+  #  binding.pry
       @profile.menu_item.price = 0
-      @profile.save(validate: false)
+      @profile.menu_item.save(validate: true)
       render json: @profile
     # else
     #   render json: @profile.errors, status: :unprocessable_entity
