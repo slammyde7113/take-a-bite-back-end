@@ -48,6 +48,8 @@ class ProfilesController < OpenReadController
     render json: @profiles
   end
 
+
+
   # POST /profiles
   def create
     @profile = Profile.new(profile_params)
@@ -61,11 +63,12 @@ class ProfilesController < OpenReadController
 
   # PATCH/PUT /profiles/1
   def update
-    if @profile.update(profile_params)
+      @profile.menu_item.price = 0
+      @profile.save(validate: false)
       render json: @profile
-    else
-      render json: @profile.errors, status: :unprocessable_entity
-    end
+    # else
+    #   render json: @profile.errors, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /profiles/1
@@ -78,6 +81,7 @@ class ProfilesController < OpenReadController
     def set_profile
       @profile = Profile.find(params[:id])
     end
+
 
     # def all_profiles
     #   Profile.where(params[:id]).each |x| do

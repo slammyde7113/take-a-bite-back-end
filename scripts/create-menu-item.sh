@@ -3,8 +3,8 @@ curl --include --request POST https://mighty-ridge-10376.herokuapp.com/menu_item
 --header "Content-Type: application/json" \
 --data '{
   "menu_item": {
-    "price": "9.99",
-    "name": "Pizza",
+    "price": "19.99",
+    "name": "Big Pizza",
     "description": "Saucy goodness",
     "location": "200 Blue St, Cat City"
   }
