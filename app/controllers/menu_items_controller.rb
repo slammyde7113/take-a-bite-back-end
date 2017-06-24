@@ -24,13 +24,27 @@ class MenuItemsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /menu_items/1
+  # PATCH/PUT /menu_items_reset/
   def update
-    if @menu_item.update(menu_item_params)
-      render json: @menu_item
-    else
-      render json: @menu_item.errors, status: :unprocessable_entity
+    @menu_items = MenuItem.all
+    @old_menu_items = { 'Pizza' => 9, 'Big Pizza' => 19 }
+    binding.pry
+    MenuItem.find_each do |item|
+      if item.name == @old_menu_items.key(9)
+        item.price = @old_menu_items['Pizza']
+      end
+      if item.name == @old_menu_items.key(19)
+        item.price = @old_menu_items['Big Pizza']
+      end
+      @menu_items.save(validate: true)
     end
+    binding.pry
+    render json: @menu_items
+    # if @menu_item.update(menu_item_params)
+    #   render json: @menu_item
+    # else
+    #   render json: @menu_item.errors, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /menu_items/1

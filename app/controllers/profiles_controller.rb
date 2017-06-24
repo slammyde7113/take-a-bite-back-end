@@ -1,4 +1,6 @@
+# class ProfilesController < OpenReadControllerApplicationController
 class ProfilesController < OpenReadController
+
   before_action :set_profile, only: [:show, :update, :destroy]
 #  before_action :all_profiles, only: [:show_user]
   # GET /profiles
@@ -92,6 +94,6 @@ class ProfilesController < OpenReadController
 
     # Only allow a trusted parameter "white list" through.
     def profile_params
-      params.require(:profile).permit(:user_id, :menu_item_id)
+      params.require(:profile).permit(:user_id, :menu_item_id, :coupon_menu_id)
     end
 end
