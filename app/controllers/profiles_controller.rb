@@ -65,14 +65,19 @@ class ProfilesController < OpenReadController
 
   # PATCH/PUT /profiles/1
   def update
-  #  binding.pry
-      @profile.menu_item.price = 0
-      @profile.menu_item.save(validate: true)
-      render json: @profile
-    # else
-    #   render json: @profile.errors, status: :unprocessable_entity
-    # end
+    if @profile.update(profile_params)
+      head :no_content
+    else
+      render json: @profile.errors, status: :unprocessable_entity
+    end
   end
+  # #  binding.pry
+  #     @profile.menu_item.price = 0
+  #     @profile.menu_item.save(validate: true)
+  #     render json: @profile
+  #   # else
+  #   #   render json: @profile.errors, status: :unprocessable_entity
+  #   # end
 
   # DELETE /profiles/1
   def destroy
@@ -83,6 +88,7 @@ class ProfilesController < OpenReadController
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = current_user.profiles.find(params[:id])
+      # current_user.profiles.find(params[:id]) Profile.find(params[:id])
     end
 
 
