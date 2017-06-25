@@ -1,4 +1,6 @@
+# class ProfilesController < OpenReadControllerApplicationController
 class ProfilesController < OpenReadController
+
   before_action :set_profile, only: [:show, :update, :destroy]
 #  before_action :all_profiles, only: [:show_user]
   # GET /profiles
@@ -63,14 +65,19 @@ class ProfilesController < OpenReadController
 
   # PATCH/PUT /profiles/1
   def update
-  #  binding.pry
-      @profile.menu_item.price = 0
-      @profile.menu_item.save(validate: true)
-      render json: @profile
-    # else
-    #   render json: @profile.errors, status: :unprocessable_entity
-    # end
+    if @profile.update(profile_params)
+      head :no_content
+    else
+      render json: @profile.errors, status: :unprocessable_entity
+    end
   end
+  # #  binding.pry
+  #     @profile.menu_item.price = 0
+  #     @profile.menu_item.save(validate: true)
+  #     render json: @profile
+  #   # else
+  #   #   render json: @profile.errors, status: :unprocessable_entity
+  #   # end
 
   # DELETE /profiles/1
   def destroy
@@ -81,6 +88,7 @@ class ProfilesController < OpenReadController
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = current_user.profiles.find(params[:id])
+      # current_user.profiles.find(params[:id]) Profile.find(params[:id])
     end
 
 
@@ -92,6 +100,6 @@ class ProfilesController < OpenReadController
 
     # Only allow a trusted parameter "white list" through.
     def profile_params
-      params.require(:profile).permit(:user_id, :menu_item_id)
+      params.require(:profile).permit(:user_id, :menu_item_id, :coupon_menu_id)
     end
 end

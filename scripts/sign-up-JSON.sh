@@ -4,7 +4,7 @@ curl "http://localhost:4741/sign-up" \
   --request POST \
   --data-urlencode '{
     "credentials": {
-      "email": "will2",
+      "email": "will3",
       "password": "will",
       "password_confirmation": "will"
     }
