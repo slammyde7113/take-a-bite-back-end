@@ -1,5 +1,5 @@
 #!/bin/bash
-curl --include --request POST http://localhost:4741/coupon_menus \
+curl --include --request POST https://mighty-ridge-10376.herokuapp.com/coupon_menus \
 --header "Content-Type: application/json" \
 --data '{
   "coupon_menu": {
